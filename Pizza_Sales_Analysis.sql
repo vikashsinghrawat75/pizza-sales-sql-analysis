@@ -30,7 +30,7 @@ SELECT TOP 5
 	p.price
 FROM
 	pizzas p JOIN
-	pizza_types p_t ON p.pizza_type_id = p.pizza_type_id
+	pizza_types p_t ON p.pizza_type_id = p_t.pizza_type_id
 ORDER BY p.price DESC;
 
 
@@ -79,12 +79,11 @@ ORDER BY Total_Quantity DESC;
 -- 7. Distribution of orders by hour of the day
 
 SELECT
-	DATEPART(HOUR,[Order_time]) AS Order_Hour,
-	COUNT(O_D.order_id) AS Order_Count
+	DATEPART(HOUR,order_time) AS Order_Hour,
+	COUNT(order_id) AS Order_Count
 FROM
-	Orders O JOIN
-	order_details O_D ON O.Order_id = O_D.order_id
-GROUP BY DATEPART(HOUR,[Order_time])
+	Orders
+GROUP BY DATEPART(HOUR,order_time)
 ORDER BY Order_Hour;
 
 -- 8. Category-wise distribution of pizzas
